@@ -7,9 +7,8 @@ int main()
     int t;
     cin >> t;
     while(t--){
-        int n, A[200005];
         int n;
         cin >> n;
-        for(int i = 0; i < n; i++) cin >> A[i];
+        cout << "Sum = " << (n%10 + n/10000) << "\n";
     }
 }
