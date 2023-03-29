@@ -7,22 +7,31 @@ int main()
     int t;
     cin >> t;
     while(t--){
-        int n, A[26], ans = 0, flag;
+        int n;
         string s;
-        cin >> n;
-        cin >> s;
+        cin >> n >> s;
+        int A[26], B[26], cnt = 0;
+        vector<int> X(n, 0), Y(n, 0);
         for(int i = 0; i < 26; i++) A[i] = 0;
-        for(int i = 0; i < n; i++) {
-            if(A[s[i] - 'a'] == 1) {
-                flag = i;
-                break;
-            }
+        for(int i = 0; i < 26; i++) B[i] = 0;
+        for(int i = 0; i < n; i++){
+            if(A[s[i] - 'a'] == 0) cnt++;
+            X[i] = cnt;
             A[s[i] - 'a']++;
         }
-        ans += flag;
-        for(int i = 0; i < 26; i++) A[i] = 0;
-        for(int i = flag; i < n; i++) A[s[i] - 'a']++;
-        for(int i = 0; i < 26; i++) if(A[i]) ans++;
+        cnt = 0;
+        for(int i = n-1; i >= 0; i--){
+            if(B[s[i] - 'a'] == 0) cnt++;
+            Y[i] = cnt;
+            B[s[i] - 'a']++;
+        }
+        int ans = 0;
+        for(int i = 0; i < n-1; i++){
+            int a = X[i];
+            int b = Y[i+1];
+            if(a+b >= ans) ans = a+b;
+        }
+        if(ans > n) ans--;
         cout << ans << "\n";
     }
 }
