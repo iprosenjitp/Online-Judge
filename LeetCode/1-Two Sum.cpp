@@ -4,18 +4,12 @@
 using namespace std;
 
 vector<int> twoSum(vector<int>& nums, int target) {
-    int x, y;
-    for(int i = 0; i < nums.size()-1; i++){
-        for(int j = i+1; j < nums.size(); j++){
-            if(nums[i] + nums[j] == target){
-                x = i;
-                y = j;
-                break;
-            }
-            if(x) break;
-        }
+    unordered_map<int, int> seen;
+    for(int i = 0; i < nums.size(); i++){
+        if(seen.count(target - nums[i])) return {i, seen[target-nums[i]]};
+        seen[nums[i]] = i;
     }
-    return {x, y};
+    return {-1, -1};
 }
 
 int main()
